@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
+import "./Timer.css";
 
 export default function Timer() {
   const [seconds, setSeconds] = useState(0);
@@ -37,19 +38,14 @@ export default function Timer() {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "10px",
-        alignItems: "space-around",
-        width: "100%",
-      }}
-    >
-      <button onClick={toggleTimer}>{isRunning ? "Pause" : "Start"}</button>
-      <div style={{ fontSize: "2rem", fontFamily: "monospace" }}>
-        {formatTime(seconds)}
-      </div>
-      <button onClick={resetTimer}>Reset</button>
+    <div className="container">
+      <button className="button" onClick={toggleTimer}>
+        {isRunning ? "Pause" : "Start"}
+      </button>
+      <div className="time">{formatTime(seconds)}</div>
+      <button className="button" onClick={resetTimer}>
+        Reset
+      </button>
     </div>
   );
 }

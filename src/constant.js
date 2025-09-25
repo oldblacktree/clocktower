@@ -1,4 +1,4 @@
-export const townsfolk = [
+export const townsfolks = [
   {
     name: "Investigator",
     nameRu: "Сыщик",
@@ -53,7 +53,7 @@ export const townsfolk = [
   },
 ];
 
-export const outsider = [
+export const outsiders = [
   {
     name: "Drunk",
     nameRu: "Пьяница",
@@ -72,7 +72,7 @@ export const outsider = [
   },
 ];
 
-export const minion = [
+export const minions = [
   {
     name: "Godfather",
     nameRu: "Крестный отец",
@@ -92,7 +92,7 @@ export const minion = [
   },
 ];
 
-export const demon = [
+export const demons = [
   {
     name: "Imp",
     nameRu: "Черт",
@@ -112,16 +112,71 @@ export const demon = [
   },
 ];
 
-export const roleLayout = {
-  5: [1, 1, 0, 3],
-  6: [1, 1, 1, 3],
-  7: [1, 1, 0, 5],
-  8: [1, 1, 1, 5],
-  9: [1, 1, 2, 5],
-  10: [1, 2, 0, 7],
-  11: [1, 2, 1, 7],
-  12: [1, 2, 2, 7],
-  13: [1, 3, 0, 9],
-  14: [1, 3, 1, 9],
-  15: [1, 3, 2, 9],
+export const roleLayouts = {
+  5: {
+    demons: 1,
+    minions: 1,
+    outsiders: 0,
+    townsfolks: 3,
+  },
+  6: {
+    demons: 1,
+    minions: 1,
+    outsiders: 1,
+    townsfolks: 3,
+  },
+  7: {
+    demons: 1,
+    minions: 1,
+    outsiders: 0,
+    townsfolks: 5,
+  },
+  8: {
+    demons: 1,
+    minions: 1,
+    outsiders: 1,
+    townsfolks: 5,
+  },
+  9: {
+    demons: 1,
+    minions: 1,
+    outsiders: 2,
+    townsfolks: 5,
+  },
+  10: {
+    demons: 1,
+    minions: 2,
+    outsiders: 0,
+    townsfolks: 7,
+  },
+  11: {
+    demons: 1,
+    minions: 2,
+    outsiders: 1,
+    townsfolks: 7,
+  },
+  12: {
+    demons: 1,
+    minions: 2,
+    outsiders: 2,
+    townsfolks: 7,
+  },
+  13: {
+    demons: 1,
+    minions: 3,
+    outsiders: 0,
+    townsfolks: 9,
+  },
+  14: {
+    demons: 1,
+    minions: 3,
+    outsiders: 1,
+    townsfolks: 9,
+  },
+  15: {
+    demons: 1,
+    minions: 3,
+    outsiders: 2,
+    townsfolks: 9,
+  },
 };
