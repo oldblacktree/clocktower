@@ -1,4 +1,4 @@
-export const townsfolks = [
+export const townsfolksAll = [
   {
     name: "Investigator",
     nameRu: "Сыщик",
@@ -53,7 +53,7 @@ export const townsfolks = [
   },
 ];
 
-export const outsiders = [
+export const outsidersAll = [
   {
     name: "Drunk",
     nameRu: "Пьяница",
@@ -72,10 +72,11 @@ export const outsiders = [
   },
 ];
 
-export const minions = [
+export const minionsAll = [
   {
     name: "Godfather",
     nameRu: "Крестный отец",
+    outsiderMod: [-1, 1],
   },
   {
     name: "Assassin",
@@ -88,11 +89,10 @@ export const minions = [
   {
     name: "Devilsadvocate",
     nameRu: "Адвокат дьявола",
-    outsiderMod: [-1, 1],
   },
 ];
 
-export const demons = [
+export const demonsAll = [
   {
     name: "Imp",
     nameRu: "Черт",
@@ -112,7 +112,7 @@ export const demons = [
   },
 ];
 
-export const roleLayouts = {
+export const roleLayoutsAll = {
   5: {
     demons: 1,
     minions: 1,

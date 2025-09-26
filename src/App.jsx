@@ -2,32 +2,24 @@ import { useState } from "react";
 import "./App.css";
 import Timer from "./components/Timer/Timer";
 import {
-  roleLayouts,
-  demons,
-  minions,
-  outsiders,
-  townsfolks,
+  roleLayoutsAll,
+  demonsAll,
+  minionsAll,
+  outsidersAll,
+  townsfolksAll,
 } from "./constant";
 
-let roleLayout, demon, minion, outsider, townsfolk;
+let roleLayout, demons, minions, outsiders, townsfolks;
 
 function App() {
   const [gamersNumber, setGamersNumber] = useState("");
-  const [isGenerateRole, generateRole] = useState(false);
+  const [isGenerateRoleClick, generateRoleClick] = useState(false);
 
   function handleGenerateRoleClick() {
-    generateRole(true);
+    generateRoleClick(true);
+    pickRoles(gamersNumber);
 
-    roleLayout = roleLayouts[gamersNumber];
-    demon = getRandomItems(demons, roleLayout.demons)[0];
-
-    // если демон изменяет число изгоев
-    if (demon.hasOwnProperty("outsiderMod")) {
-      if (typeof demon.outsiderMod === "number") {
-        roleLayout.outsiders = roleLayout.outsiders + demon.outsiderMod;
-        roleLayout.townsfolks = roleLayout.townsfolks - demon.outsiderMod;
-      }
-    }
+    console.log("asdf");
   }
 
   return (
@@ -41,32 +33,50 @@ function App() {
           value={gamersNumber}
           onChange={(e) => setGamersNumber(e.target.value)}
         />
-        <button
-          onClick={() => handleGenerateRoleClick()}
-          disabled={isGenerateRole}
-        >
-          Сгенерировать
-        </button>
+        <button onClick={() => handleGenerateRoleClick()}>Сгенерировать</button>
       </div>
 
-      {isGenerateRole && (
-        <div className="roles">
-          <div>
-            <p>Демон:</p>
-            <p>{demon.nameRu}</p>
-          </div>
-          <div>
-            <p>Приспешники:</p>
-            <p></p>
-          </div>
+      <div className="roles">
+        <div className="role">
+          <p>Демон:</p>
+          <ul>
+            {demons &&
+              demons.map((item, index) => <li key={index}>{item.nameRu}</li>)}
+          </ul>
         </div>
-      )}
+        <div className="role">
+          <p>Приспешники:</p>
+          <ul>
+            {minions &&
+              minions.map((item, index) => <li key={index}>{item.nameRu}</li>)}
+          </ul>
+        </div>
+        <div className="role">
+          <p>Изгои:</p>
+          <ul>
+            {outsiders &&
+              outsiders.map((item, index) => (
+                <li key={index}>{item.nameRu}</li>
+              ))}
+          </ul>
+        </div>
+        <div className="role">
+          <p>Горожане:</p>
+          <ul>
+            {townsfolks &&
+              townsfolks.map((item, index) => (
+                <li key={index}>{item.nameRu}</li>
+              ))}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
 
 export default App;
 
+//выбирает рандомныt items из массива
 function getRandomItems(arr, count = 1) {
   if (!arr || arr.length === 0 || count <= 0) return [];
 
@@ -84,7 +94,38 @@ function getRandomItems(arr, count = 1) {
   return result;
 }
 
-// Пример использования
-const characters = ["Demons", "Minions", "Outsiders", "Townsfolks"];
-const randomCharacters = getRandomItems(characters, 3);
-console.log(randomCharacters);
+//сделать раскладку по персонажам
+function pickRoles(playersNumber) {
+  roleLayout = roleLayoutsAll[playersNumber];
+
+  demons = getRandomItems(demonsAll, roleLayout.demons);
+  changeOutsidersNumber(demons);
+
+  minions = getRandomItems(minionsAll, roleLayout.minions);
+  changeOutsidersNumber(minions);
+
+  outsiders = getRandomItems(outsidersAll, roleLayout.outsiders);
+  townsfolks = getRandomItems(townsfolksAll, roleLayout.townsfolks);
+}
+
+function changeOutsidersNumber(arr) {
+  arr.forEach((role) => {
+    if (role.hasOwnProperty("outsiderMod")) {
+      if (typeof role.outsiderMod === "number") {
+        roleLayout.outsiders = roleLayout.outsiders + role.outsiderMod;
+        roleLayout.townsfolks = roleLayout.townsfolks - role.outsiderMod;
+
+        console.log(
+          role.nameRu + "изменил число изгоев на " + role.outsiderMod
+        );
+      }
+      if (Array.isArray(role.outsiderMod)) {
+        let number = getRandomItems(role.outsiderMod)[0];
+        roleLayout.outsiders = roleLayout.outsiders + number;
+        roleLayout.townsfolks = roleLayout.townsfolks - number;
+
+        console.log(role.nameRu + "изменил число изгоев на " + number);
+      }
+    }
+  });
+}
