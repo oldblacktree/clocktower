@@ -32,3 +32,13 @@ button {
 .generate input {
   font-size: 30px;
 }
+
+.role {
+  display: flex;
+}
+
+.role ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
