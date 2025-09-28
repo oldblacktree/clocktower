@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
+import ScenarioBuilder from "./pages/scenarioBuilder";
+import Setup from "./pages/setup";
+import Guiding from "./pages/guiding";
 import "./App.css";
-import Timer from "./components/Timer/Timer";
+
 import {
   roleLayouts,
   demons,
@@ -31,37 +35,83 @@ function App() {
   }
 
   return (
-    <>
-      <Timer />
-      <div className="generate container">
-        <span>Игроков:</span>
-        <input
-          type="number"
-          className="input-gamers-number"
-          value={gamersNumber}
-          onChange={(e) => setGamersNumber(e.target.value)}
-        />
-        <button
-          onClick={() => handleGenerateRoleClick()}
-          disabled={isGenerateRole}
-        >
-          Сгенерировать
-        </button>
-      </div>
-
-      {isGenerateRole && (
-        <div className="roles">
-          <div>
-            <p>Демон:</p>
-            <p>{demon.nameRu}</p>
-          </div>
-          <div>
-            <p>Приспешники:</p>
-            <p></p>
-          </div>
+    <BrowserRouter>
+      {/* <>
+        <div className="generate container">
+          <span>Игроков:</span>
+          <input
+            type="number"
+            className="input-gamers-number"
+            value={gamersNumber}
+            onChange={(e) => setGamersNumber(e.target.value)}
+          />
+          <button
+            onClick={() => handleGenerateRoleClick()}
+            disabled={isGenerateRole}
+          >
+            Сгенерировать
+          </button>
         </div>
-      )}
-    </>
+
+        {isGenerateRole && (
+          <div className="roles">
+            <div>
+              <p>Демон:</p>
+              <p>{demon.nameRu}</p>
+            </div>
+            <div>
+              <p>Приспешники:</p>
+              <p></p>
+            </div>
+          </div>
+        )}
+      </> */}
+
+      <div className="flex flex-col h-screen">
+        {/* Верхняя панель навигации */}
+        <nav className="flex justify-around bg-gray-800 text-white p-3">
+          <NavLink
+            to="/scenario-builder"
+            className={({ isActive }) =>
+              "flex flex-col items-center " +
+              (isActive ? "text-yellow-400" : "")
+            }
+          >
+            📜
+            <span className="text-xs">Сценарии</span>
+          </NavLink>
+          <NavLink
+            to="/setup"
+            className={({ isActive }) =>
+              "flex flex-col items-center " +
+              (isActive ? "text-yellow-400" : "")
+            }
+          >
+            🎭
+            <span className="text-xs">Игроки</span>
+          </NavLink>
+          <NavLink
+            to="/night-order"
+            className={({ isActive }) =>
+              "flex flex-col items-center " +
+              (isActive ? "text-yellow-400" : "")
+            }
+          >
+            🌙
+            <span className="text-xs">Ночь</span>
+          </NavLink>
+        </nav>
+
+        {/* Основное содержимое */}
+        <div className="flex-1 overflow-y-auto p-4">
+          <Routes>
+            <Route path="/scenario-builder" element={<ScenarioBuilder />} />
+            <Route path="/setup" element={<Setup />} />
+            <Route path="/night-order" element={<Guiding />} />
+          </Routes>
+        </div>
+      </div>
+    </BrowserRouter>
   );
 }
 
