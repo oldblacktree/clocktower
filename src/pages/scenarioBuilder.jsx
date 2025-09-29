@@ -1,5 +1,4 @@
 import { useState } from "react";
-import washerwomanImg from "../assets/washerwoman.png";
 
 // Заглушка ролей — укажи свои картинки в папке /src/assets
 const allRoles = [
@@ -7,25 +6,25 @@ const allRoles = [
     id: "washerwoman",
     name: "Washerwoman",
     type: "townsfolk",
-    img: "../public/washerwoman.png",
+    img: import.meta.env.BASE_URL + "/assets/roles/washerwoman.png",
   },
   {
     id: "imp",
     name: "Imp",
     type: "demon",
-    img: "../../public/washerwoman.png",
+    img: import.meta.env.BASE_URL + "/assets/roles/imp.png",
   },
   {
     id: "poisoner",
     name: "Poisoner",
     type: "minion",
-    img: "../../public/washerwoman.png",
+    img: import.meta.env.BASE_URL + "/assets/roles/poisoner.png",
   },
   {
     id: "fortune_teller",
     name: "Fortune Teller",
     type: "townsfolk",
-    img: "../../public/washerwoman.png",
+    img: import.meta.env.BASE_URL + "/assets/roles/fortune_teller.png",
   },
 ];
 
@@ -60,7 +59,7 @@ export default function ScenarioBuilder() {
                   ${isSelected ? "border-blue-500" : "border-transparent"}`}
               >
                 <img
-                  src={washerwomanImg}
+                  src={role.img}
                   alt={role.name}
                   className="w-20 h-20 object-cover rounded-full"
                 />
