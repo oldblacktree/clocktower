@@ -1,32 +1,5 @@
 import { useState } from "react";
-
-// Заглушка ролей — укажи свои картинки в папке /src/assets
-const allRoles = [
-  {
-    id: "washerwoman",
-    name: "Washerwoman",
-    type: "townsfolk",
-    img: import.meta.env.BASE_URL + "/assets/roles/washerwoman.png",
-  },
-  {
-    id: "imp",
-    name: "Imp",
-    type: "demon",
-    img: import.meta.env.BASE_URL + "/assets/roles/imp.png",
-  },
-  {
-    id: "poisoner",
-    name: "Poisoner",
-    type: "minion",
-    img: import.meta.env.BASE_URL + "/assets/roles/poisoner.png",
-  },
-  {
-    id: "fortune_teller",
-    name: "Fortune Teller",
-    type: "townsfolk",
-    img: import.meta.env.BASE_URL + "/assets/roles/fortune_teller.png",
-  },
-];
+import { roles as rolesAll } from "../data/roles";
 
 export default function ScenarioBuilder() {
   const [selectedRoles, setSelectedRoles] = useState([]);
@@ -48,24 +21,97 @@ export default function ScenarioBuilder() {
       {/* Все роли */}
       <div>
         <h2 className="font-semibold mb-2">Все роли</h2>
+        <h4>Горожане</h4>
         <div className="grid grid-cols-4 gap-4">
-          {allRoles.map((role) => {
-            const isSelected = selectedRoles.some((r) => r.id === role.id);
-            return (
-              <div
-                key={role.id}
-                onClick={() => toggleRole(role)}
-                className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+          {rolesAll
+            .filter((item) => item.type === "townsfolk")
+            .map((role) => {
+              const isSelected = selectedRoles.some((r) => r.id === role.id);
+              return (
+                <div
+                  key={role.id}
+                  onClick={() => toggleRole(role)}
+                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
                   ${isSelected ? "border-blue-500" : "border-transparent"}`}
-              >
-                <img
-                  src={role.img}
-                  alt={role.name}
-                  className="w-20 h-20 object-cover rounded-full"
-                />
-              </div>
-            );
-          })}
+                >
+                  <img
+                    src={`${import.meta.env.BASE_URL}/assets/roles/${
+                      role.id
+                    }.png`}
+                    className="w-20 h-20 object-cover rounded-full"
+                  />
+                </div>
+              );
+            })}
+        </div>
+        <h4>Изгои</h4>
+        <div className="grid grid-cols-4 gap-4">
+          {rolesAll
+            .filter((item) => item.type === "outsider")
+            .map((role) => {
+              const isSelected = selectedRoles.some((r) => r.id === role.id);
+              return (
+                <div
+                  key={role.id}
+                  onClick={() => toggleRole(role)}
+                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+                  ${isSelected ? "border-blue-500" : "border-transparent"}`}
+                >
+                  <img
+                    src={`${import.meta.env.BASE_URL}/assets/roles/${
+                      role.id
+                    }.png`}
+                    className="w-20 h-20 object-cover rounded-full"
+                  />
+                </div>
+              );
+            })}
+        </div>
+        <h4>Приспешники</h4>
+        <div className="grid grid-cols-4 gap-4">
+          {rolesAll
+            .filter((item) => item.type === "minion")
+            .map((role) => {
+              const isSelected = selectedRoles.some((r) => r.id === role.id);
+              return (
+                <div
+                  key={role.id}
+                  onClick={() => toggleRole(role)}
+                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+                  ${isSelected ? "border-blue-500" : "border-transparent"}`}
+                >
+                  <img
+                    src={`${import.meta.env.BASE_URL}/assets/roles/${
+                      role.id
+                    }.png`}
+                    className="w-20 h-20 object-cover rounded-full"
+                  />
+                </div>
+              );
+            })}
+        </div>
+        <h4>Демоны</h4>
+        <div className="grid grid-cols-4 gap-4">
+          {rolesAll
+            .filter((item) => item.type === "demon")
+            .map((role) => {
+              const isSelected = selectedRoles.some((r) => r.id === role.id);
+              return (
+                <div
+                  key={role.id}
+                  onClick={() => toggleRole(role)}
+                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+                  ${isSelected ? "border-blue-500" : "border-transparent"}`}
+                >
+                  <img
+                    src={`${import.meta.env.BASE_URL}/assets/roles/${
+                      role.id
+                    }.png`}
+                    className="w-20 h-20 object-cover rounded-full"
+                  />
+                </div>
+              );
+            })}
         </div>
       </div>
 
@@ -79,7 +125,7 @@ export default function ScenarioBuilder() {
           {selectedRoles.map((role) => (
             <li key={role.id} className="flex items-center space-x-1">
               <img
-                src={role.img}
+                src={`${import.meta.env.BASE_URL}/assets/roles/${role.id}.png`}
                 alt={role.name}
                 className="w-8 h-8 rounded-full"
               />
