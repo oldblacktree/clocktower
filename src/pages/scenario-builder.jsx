@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { roles as rolesAll } from "../data/roles";
 
-export default function ScenarioBuilder() {
-  const [selectedRoles, setSelectedRoles] = useState([]);
-
+export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
   const toggleRole = (role) => {
     if (selectedRoles.find((r) => r.id === role.id)) {
       // если выбрана → убираем
@@ -31,14 +29,14 @@ export default function ScenarioBuilder() {
                 <div
                   key={role.id}
                   onClick={() => toggleRole(role)}
-                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#23343b]
                   ${isSelected ? "border-blue-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
                       role.id
                     }.png`}
-                    className="w-20 h-20 object-cover rounded-full"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               );
@@ -54,14 +52,14 @@ export default function ScenarioBuilder() {
                 <div
                   key={role.id}
                   onClick={() => toggleRole(role)}
-                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#23343b]
                   ${isSelected ? "border-blue-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
                       role.id
                     }.png`}
-                    className="w-20 h-20 object-cover rounded-full"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               );
@@ -77,14 +75,14 @@ export default function ScenarioBuilder() {
                 <div
                   key={role.id}
                   onClick={() => toggleRole(role)}
-                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#312a2b]
                   ${isSelected ? "border-blue-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
                       role.id
                     }.png`}
-                    className="w-20 h-20 object-cover rounded-full"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               );
@@ -100,14 +98,14 @@ export default function ScenarioBuilder() {
                 <div
                   key={role.id}
                   onClick={() => toggleRole(role)}
-                  className={`relative cursor-pointer rounded-full overflow-hidden border-4 transition 
+                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#312a2b]
                   ${isSelected ? "border-blue-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
                       role.id
                     }.png`}
-                    className="w-20 h-20 object-cover rounded-full"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               );

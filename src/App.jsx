@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
-import ScenarioBuilder from "./pages/scenarioBuilder";
+import ScenarioBuilder from "./pages/scenario-builder";
 import Setup from "./pages/setup";
 import Guiding from "./pages/guiding";
 import "./App.css";
@@ -16,6 +16,7 @@ import {
 let roleLayout, demons, minions, outsiders, townsfolks;
 
 function App() {
+  const [selectedRoles, setSelectedRoles] = useState([]);
   const [gamersNumber, setGamersNumber] = useState("");
   const [isGenerateRoleClick, generateRoleClick] = useState(false);
 
@@ -30,7 +31,7 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col h-screen">
         {/* Верхняя панель навигации */}
-        <nav className="flex justify-around bg-gray-800 text-white p-3">
+        <nav className="flex justify-around bg-gray-800 text-white p-1">
           <NavLink
             to="/scenario-builder"
             className={({ isActive }) =>
@@ -39,7 +40,7 @@ function App() {
             }
           >
             📜
-            <span className="text-xs">Сценарии</span>
+            <span className="text-base">Сценарий</span>
           </NavLink>
           <NavLink
             to="/setup"
@@ -49,7 +50,7 @@ function App() {
             }
           >
             🎭
-            <span className="text-xs">Игроки</span>
+            <span className="text-base">Игроки</span>
           </NavLink>
           <NavLink
             to="/night-order"
@@ -59,14 +60,22 @@ function App() {
             }
           >
             🌙
-            <span className="text-xs">Ночь</span>
+            <span className="text-base">Ночь</span>
           </NavLink>
         </nav>
 
         {/* Основное содержимое */}
         <div className="flex-1 overflow-y-auto p-4">
           <Routes>
-            <Route path="/scenario-builder" element={<ScenarioBuilder />} />
+            <Route
+              path="/scenario-builder"
+              element={
+                <ScenarioBuilder
+                  selectedRoles={selectedRoles}
+                  setSelectedRoles={setSelectedRoles}
+                />
+              }
+            />
             <Route path="/setup" element={<Setup />} />
             <Route path="/night-order" element={<Guiding />} />
           </Routes>
