@@ -14,11 +14,8 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
 
   return (
     <div className="p-4 space-y-6">
-      <h1 className="text-xl font-bold">Конструктор сценария</h1>
-
       {/* Все роли */}
       <div>
-        <h2 className="font-semibold mb-2">Все роли</h2>
         <h4>Горожане</h4>
         <div className="grid grid-cols-4 gap-4">
           {rolesAll

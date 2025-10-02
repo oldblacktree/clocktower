@@ -1,5 +1,5 @@
 export const roles = [
-  // 🟢 Townsfolk
+  // Trouble Brewing (основные)
   {
     id: "washerwoman",
     name: "Washerwoman",
@@ -104,7 +104,8 @@ export const roles = [
     firstNight: null,
     otherNights: null,
   },
-  // 🟡 Outsiders
+
+  // Outsiders (Trouble Brewing)
   {
     id: "butler",
     name: "Butler",
@@ -137,7 +138,8 @@ export const roles = [
     firstNight: null,
     otherNights: null,
   },
-  // 🔴 Minions
+
+  // Minions (Trouble Brewing)
   {
     id: "poisoner",
     name: "Poisoner",
@@ -171,7 +173,7 @@ export const roles = [
     otherNights: null,
   },
 
-  // 👹 Demon
+  // Demon (Trouble Brewing)
   {
     id: "imp",
     name: "Imp",
@@ -180,4 +182,211 @@ export const roles = [
     firstNight: 8,
     otherNights: 8,
   },
+
+  // Bad Moon Rising (основные)
+  {
+    id: "grandmother",
+    name: "Grandmother",
+    nameRu: "Бабушка",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "sailor",
+    name: "Sailor",
+    nameRu: "Моряк",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "chambermaid",
+    name: "Chambermaid",
+    nameRu: "Горничная",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "exorcist",
+    name: "Exorcist",
+    nameRu: "Экзорцист",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "innkeeper",
+    name: "Innkeeper",
+    nameRu: "Хозяин таверны",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "gambler",
+    name: "Gambler",
+    nameRu: "Игрок",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "gossip",
+    name: "Gossip",
+    nameRu: "Сплетница",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "courtier",
+    name: "Courtier",
+    nameRu: "Придворный",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "professor",
+    name: "Professor",
+    nameRu: "Профессор",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "minstrel",
+    name: "Minstrel",
+    nameRu: "Министрель",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "tea_lady",
+    name: "Tea Lady",
+    nameRu: "Чайная Леди",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "pacifist",
+    name: "Pacifist",
+    nameRu: "Пацифист",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "fool",
+    name: "Fool",
+    nameRu: "Шут",
+    type: "townsfolk",
+    firstNight: null,
+    otherNights: null,
+  },
+
+  {
+    id: "goon",
+    name: "Goon",
+    nameRu: "Приспешник",
+    type: "outsider",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "lunatic",
+    name: "Lunatic",
+    nameRu: "Лунатик",
+    type: "outsider",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "tinker",
+    name: "Tinker",
+    nameRu: "Мастер",
+    type: "outsider",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "moonchild",
+    name: "Moonchild",
+    nameRu: "Лунный Ребёнок",
+    type: "outsider",
+    firstNight: null,
+    otherNights: null,
+  },
+
+  {
+    id: "godfather",
+    name: "Godfather",
+    nameRu: "Крёстный отец",
+    type: "minion",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "devils_advocate",
+    name: "Devil's Advocate",
+    nameRu: "Искусительный Демон",
+    type: "minion",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "assassin",
+    name: "Assassin",
+    nameRu: "Ассасин",
+    type: "minion",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "mastermind",
+    name: "Mastermind",
+    nameRu: "Главный Ум",
+    type: "minion",
+    firstNight: null,
+    otherNights: null,
+  },
+
+  {
+    id: "zombuul",
+    name: "Zombuul",
+    nameRu: "Зомбул",
+    type: "demon",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "pukka",
+    name: "Pukka",
+    nameRu: "Пукка",
+    type: "demon",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "shabaloth",
+    name: "Shabaloth",
+    nameRu: "Шабалот",
+    type: "demon",
+    firstNight: null,
+    otherNights: null,
+  },
+  {
+    id: "po",
+    name: "Po",
+    nameRu: "По",
+    type: "demon",
+    firstNight: null,
+    otherNights: null,
+  },
+
+  // Можно добавить экспериментальные роли здесь
 ];

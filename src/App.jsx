@@ -50,7 +50,7 @@ function App() {
             }
           >
             🎭
-            <span className="text-base">Игроки</span>
+            <span className="text-base">Раскладка</span>
           </NavLink>
           <NavLink
             to="/night-order"
