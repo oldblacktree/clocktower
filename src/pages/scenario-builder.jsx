@@ -27,7 +27,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                   key={role.id}
                   onClick={() => toggleRole(role)}
                   className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#23343b]
-                  ${isSelected ? "border-blue-500" : "border-transparent"}`}
+                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
@@ -49,8 +49,8 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                 <div
                   key={role.id}
                   onClick={() => toggleRole(role)}
-                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#23343b]
-                  ${isSelected ? "border-blue-500" : "border-transparent"}`}
+                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#192429]
+                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
@@ -73,7 +73,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                   key={role.id}
                   onClick={() => toggleRole(role)}
                   className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#312a2b]
-                  ${isSelected ? "border-blue-500" : "border-transparent"}`}
+                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
@@ -95,8 +95,8 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                 <div
                   key={role.id}
                   onClick={() => toggleRole(role)}
-                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#312a2b]
-                  ${isSelected ? "border-blue-500" : "border-transparent"}`}
+                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#2f1c1f]
+                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
