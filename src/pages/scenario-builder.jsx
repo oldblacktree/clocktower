@@ -25,8 +25,8 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
     <div className="p-4 space-y-6">
       {/* Все роли */}
       <div>
-        <h4>Горожане</h4>
-        <div className="grid grid-cols-4 gap-4">
+        <h4 className={`text-yellow-300  text-lg`}>Горожане</h4>
+        <div className="grid grid-cols-4 gap-4 py-2">
           {rolesToShow
             .filter((item) => item.type === "townsfolk")
             .map((role) => {
@@ -52,7 +52,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
               );
             })}
         </div>
-        <h4>Изгои</h4>
+        <h4 className={`text-yellow-300 text-lg`}>Изгои</h4>
         <div className="grid grid-cols-4 gap-4">
           {rolesToShow
             .filter((item) => item.type === "outsider")
@@ -79,7 +79,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
               );
             })}
         </div>
-        <h4>Приспешники</h4>
+        <h4 className={`text-yellow-300  text-lg`}>Приспешники</h4>
         <div className="grid grid-cols-4 gap-4">
           {rolesToShow
             .filter((item) => item.type === "minion")
@@ -106,7 +106,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
               );
             })}
         </div>
-        <h4>Демоны</h4>
+        <h4 className={`text-yellow-300  text-lg`}>Демоны</h4>
         <div className="grid grid-cols-4 gap-4">
           {rolesToShow
             .filter((item) => item.type === "demon")
