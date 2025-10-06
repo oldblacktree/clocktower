@@ -29,7 +29,7 @@ function App() {
             className={({ isActive }) =>
               "flex-1 text-center py-2 px-3  transition text-lg " +
               (isActive
-                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-400"
+                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-500"
                 : "hover:bg-gray-700 text-indigo-300")
             }
           >
@@ -41,7 +41,7 @@ function App() {
             className={({ isActive }) =>
               "flex-1 text-center py-2 px-3  transition text-lg " +
               (isActive
-                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-400"
+                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-500"
                 : "hover:bg-gray-700 text-indigo-300")
             }
           >
@@ -53,7 +53,7 @@ function App() {
             className={({ isActive }) =>
               "flex-1 text-center py-2 px-3  transition text-lg " +
               (isActive
-                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-400"
+                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-500"
                 : "hover:bg-gray-700 text-indigo-300")
             }
           >
