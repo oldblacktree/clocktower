@@ -5,14 +5,6 @@ import Setup from "./pages/setup";
 import Guiding from "./pages/guiding";
 import "./App.css";
 
-import {
-  roleLayoutsAll,
-  demonsAll,
-  minionsAll,
-  outsidersAll,
-  townsfolksAll,
-} from "./constant";
-
 let roleLayout, demons, minions, outsiders, townsfolks;
 
 function App() {
@@ -31,41 +23,46 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col h-screen">
         {/* Верхняя панель навигации */}
-        <nav className="flex justify-around bg-gray-800 text-white p-1">
+        <nav className="flex justify-around bg-gray-800 text-white">
           <NavLink
             to="/scenario-builder"
             className={({ isActive }) =>
-              "flex flex-col items-center " +
-              (isActive ? "text-yellow-400" : "")
+              "flex-1 text-center py-2 px-3  transition text-lg " +
+              (isActive
+                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-400"
+                : "hover:bg-gray-700 text-indigo-300")
             }
           >
-            📜
-            <span className="text-base">Сценарий</span>
+            Сценарий
           </NavLink>
+
           <NavLink
             to="/setup"
             className={({ isActive }) =>
-              "flex flex-col items-center " +
-              (isActive ? "text-yellow-400" : "")
+              "flex-1 text-center py-2 px-3  transition text-lg " +
+              (isActive
+                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-400"
+                : "hover:bg-gray-700 text-indigo-300")
             }
           >
-            🎭
-            <span className="text-base">Раскладка</span>
+            Генерация
           </NavLink>
+
           <NavLink
             to="/night-order"
             className={({ isActive }) =>
-              "flex flex-col items-center " +
-              (isActive ? "text-yellow-400" : "")
+              "flex-1 text-center py-2 px-3  transition text-lg " +
+              (isActive
+                ? "bg-gray-700 text-white-400 border-b-4 border-yellow-400"
+                : "hover:bg-gray-700 text-indigo-300")
             }
           >
-            🌙
-            <span className="text-base">Ночь</span>
+            Ночь
           </NavLink>
         </nav>
 
         {/* Основное содержимое */}
-        <div className="flex-1 overflow-y-auto p-4">
+        <div className="flex-1 overflow-y-auto">
           <Routes>
             <Route
               path="/scenario-builder"

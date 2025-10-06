@@ -2,7 +2,16 @@ import { useState } from "react";
 import { roles as rolesAll } from "../data/roles";
 
 export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
+  const [showSelectedOnly, setShowSelectedOnly] = useState(false);
+
+  // если включен режим "только выбранные", то фильтруем массив
+  const rolesToShow = showSelectedOnly ? selectedRoles : rolesAll;
+
   const toggleRole = (role) => {
+    if (showSelectedOnly) {
+      return;
+    }
+
     if (selectedRoles.find((r) => r.id === role.id)) {
       // если выбрана → убираем
       setSelectedRoles(selectedRoles.filter((r) => r.id !== role.id));
@@ -18,7 +27,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
       <div>
         <h4>Горожане</h4>
         <div className="grid grid-cols-4 gap-4">
-          {rolesAll
+          {rolesToShow
             .filter((item) => item.type === "townsfolk")
             .map((role) => {
               const isSelected = selectedRoles.some((r) => r.id === role.id);
@@ -27,7 +36,11 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                   key={role.id}
                   onClick={() => toggleRole(role)}
                   className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#23343b]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
+                  ${
+                    isSelected && !showSelectedOnly
+                      ? "border-purple-500"
+                      : "border-transparent"
+                  }`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
@@ -41,7 +54,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
         </div>
         <h4>Изгои</h4>
         <div className="grid grid-cols-4 gap-4">
-          {rolesAll
+          {rolesToShow
             .filter((item) => item.type === "outsider")
             .map((role) => {
               const isSelected = selectedRoles.some((r) => r.id === role.id);
@@ -50,7 +63,11 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                   key={role.id}
                   onClick={() => toggleRole(role)}
                   className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#192429]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
+                  ${
+                    isSelected && !showSelectedOnly
+                      ? "border-purple-500"
+                      : "border-transparent"
+                  }`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
@@ -64,7 +81,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
         </div>
         <h4>Приспешники</h4>
         <div className="grid grid-cols-4 gap-4">
-          {rolesAll
+          {rolesToShow
             .filter((item) => item.type === "minion")
             .map((role) => {
               const isSelected = selectedRoles.some((r) => r.id === role.id);
@@ -73,7 +90,11 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                   key={role.id}
                   onClick={() => toggleRole(role)}
                   className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#312a2b]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
+                  ${
+                    isSelected && !showSelectedOnly
+                      ? "border-purple-500"
+                      : "border-transparent"
+                  }`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
@@ -87,7 +108,7 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
         </div>
         <h4>Демоны</h4>
         <div className="grid grid-cols-4 gap-4">
-          {rolesAll
+          {rolesToShow
             .filter((item) => item.type === "demon")
             .map((role) => {
               const isSelected = selectedRoles.some((r) => r.id === role.id);
@@ -96,7 +117,11 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
                   key={role.id}
                   onClick={() => toggleRole(role)}
                   className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#2f1c1f]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
+                  ${
+                    isSelected && !showSelectedOnly
+                      ? "border-purple-500"
+                      : "border-transparent"
+                  }`}
                 >
                   <img
                     src={`${import.meta.env.BASE_URL}/assets/roles/${
@@ -110,24 +135,16 @@ export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
         </div>
       </div>
 
-      {/* Выбранные роли */}
-      <div>
-        <h2 className="font-semibold mb-2">Выбранные роли</h2>
-        {selectedRoles.length === 0 && (
-          <p className="text-gray-500">Нет выбранных ролей</p>
-        )}
-        <ul className="flex flex-wrap gap-2">
-          {selectedRoles.map((role) => (
-            <li key={role.id} className="flex items-center space-x-1">
-              <img
-                src={`${import.meta.env.BASE_URL}/assets/roles/${role.id}.png`}
-                alt={role.name}
-                className="w-8 h-8 rounded-full"
-              />
-              <span className="text-sm">{role.name}</span>
-            </li>
-          ))}
-        </ul>
+      {/* Фиксированная кнопка снизу */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-800 ">
+        <button
+          onClick={() => setShowSelectedOnly(!showSelectedOnly)}
+          className="w-full py-2 text-lg font-semibold transition bg-gray-800 text-indigo-300 border border-yellow-300"
+        >
+          {showSelectedOnly
+            ? "Вернуться к выбору ролей"
+            : "Показать выбранные роли"}
+        </button>
       </div>
     </div>
   );
