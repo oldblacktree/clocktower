@@ -1115,3 +1115,72 @@ export const roles = [
     otherNights: null,
   },
 ];
+
+export const roleLayouts = {
+  5: {
+    demons: 1,
+    minions: 1,
+    outsiders: 0,
+    townsfolks: 3,
+  },
+  6: {
+    demons: 1,
+    minions: 1,
+    outsiders: 1,
+    townsfolks: 3,
+  },
+  7: {
+    demons: 1,
+    minions: 1,
+    outsiders: 0,
+    townsfolks: 5,
+  },
+  8: {
+    demons: 1,
+    minions: 1,
+    outsiders: 1,
+    townsfolks: 5,
+  },
+  9: {
+    demons: 1,
+    minions: 1,
+    outsiders: 2,
+    townsfolks: 5,
+  },
+  10: {
+    demons: 1,
+    minions: 2,
+    outsiders: 0,
+    townsfolks: 7,
+  },
+  11: {
+    demons: 1,
+    minions: 2,
+    outsiders: 1,
+    townsfolks: 7,
+  },
+  12: {
+    demons: 1,
+    minions: 2,
+    outsiders: 2,
+    townsfolks: 7,
+  },
+  13: {
+    demons: 1,
+    minions: 3,
+    outsiders: 0,
+    townsfolks: 9,
+  },
+  14: {
+    demons: 1,
+    minions: 3,
+    outsiders: 1,
+    townsfolks: 9,
+  },
+  15: {
+    demons: 1,
+    minions: 3,
+    outsiders: 2,
+    townsfolks: 9,
+  },
+};

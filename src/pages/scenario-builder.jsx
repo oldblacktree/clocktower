@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { roles as rolesAll } from "../data/roles";
 
-export default function ScenarioBuilder({ selectedRoles, setSelectedRoles }) {
-  const [showSelectedOnly, setShowSelectedOnly] = useState(false);
-
+export default function ScenarioBuilder({
+  selectedRoles,
+  setSelectedRoles,
+  showSelectedOnly,
+  setShowSelectedOnly,
+}) {
   // если включен режим "только выбранные", то фильтруем массив
   const rolesToShow = showSelectedOnly ? selectedRoles : rolesAll;
 
