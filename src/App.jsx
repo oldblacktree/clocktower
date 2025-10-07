@@ -5,8 +5,6 @@ import Setup from "./pages/setup";
 import Guiding from "./pages/guiding";
 import "./App.css";
 
-let roleLayout, demons, minions, outsiders, townsfolks;
-
 function App() {
   const [selectedRoles, setSelectedRoles] = useState([]);
   const [showSelectedOnly, setShowSelectedOnly] = useState(false);
@@ -19,7 +17,7 @@ function App() {
         {/* Верхняя панель навигации */}
         <nav className="flex justify-around bg-gray-800 text-white">
           <NavLink
-            to="/scenario-builder"
+            to="/scenario"
             className={({ isActive }) =>
               "flex-1 text-center py-2 px-3  transition text-lg " +
               (isActive
@@ -59,7 +57,7 @@ function App() {
         <div className="flex-1 overflow-y-auto">
           <Routes>
             <Route
-              path="/scenario-builder"
+              path="/scenario"
               element={
                 <ScenarioBuilder
                   selectedRoles={selectedRoles}
