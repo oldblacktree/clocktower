@@ -1,12 +1,254 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
-import ScenarioBuilder from "./pages/scenario-builder";
+import ScenarioBuilder from "./pages/scenario";
 import Setup from "./pages/setup";
 import Guiding from "./pages/guiding";
 import "./App.css";
 
 function App() {
-  const [selectedRoles, setSelectedRoles] = useState([]);
+  const [selectedRoles, setSelectedRoles] = useState([
+    {
+      id: "huntsman",
+      name: "Huntsman",
+      nameRu: "Егерь",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "gossip",
+      name: "Gossip",
+      nameRu: "Сплетница",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "innkeeper",
+      name: "Innkeeper",
+      nameRu: "Хозяин таверны",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "heretic",
+      name: "Heretic",
+      nameRu: "Еретик",
+      type: "outsider",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "saint",
+      name: "Saint",
+      nameRu: "Святой",
+      type: "outsider",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "damsel",
+      name: "Damsel",
+      nameRu: "Дамочка",
+      type: "outsider",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "marionette",
+      name: "Marionette",
+      nameRu: "Марионетка",
+      type: "minion",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "eviltwin",
+      name: "Eviltwin",
+      nameRu: "Злой близнец",
+      type: "minion",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "witch",
+      name: "Witch",
+      nameRu: "Ведьма",
+      type: "minion",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "nodashii",
+      name: "Nodashii",
+      nameRu: "Но Даши",
+      type: "demon",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "pukka",
+      name: "Pukka",
+      nameRu: "Пукка",
+      type: "demon",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "chef",
+      name: "Chef",
+      nameRu: "Повар",
+      type: "townsfolk",
+      firstNight: 4,
+      otherNights: null,
+    },
+    {
+      id: "balloonist",
+      name: "Balloonist",
+      nameRu: "Аэронавт",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "banshee",
+      name: "Banshee",
+      nameRu: "Банши",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "clockmaker",
+      name: "Clockmaker",
+      nameRu: "Часовщик",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "cannibal",
+      name: "Cannibal",
+      nameRu: "Каннибал",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "courtier",
+      name: "Courtier",
+      nameRu: "Придворный",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "fool",
+      name: "Fool",
+      nameRu: "Шут",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "grandmother",
+      name: "Grandmother",
+      nameRu: "Бабушка",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "librarian",
+      name: "Librarian",
+      nameRu: "Библиотекарь",
+      type: "townsfolk",
+      firstNight: 2,
+      otherNights: null,
+    },
+    {
+      id: "investigator",
+      name: "Investigator",
+      nameRu: "Сыщик",
+      type: "townsfolk",
+      firstNight: 3,
+      otherNights: null,
+    },
+    {
+      id: "tinker",
+      name: "Tinker",
+      nameRu: "Механик",
+      type: "outsider",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "mezepheles",
+      name: "Mezepheles",
+      nameRu: "Мецефель",
+      type: "minion",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "alhadikhia",
+      name: "Alhadikhia",
+      nameRu: "Аль-Адихия",
+      type: "demon",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "kazali",
+      name: "Kazali",
+      nameRu: "Казил",
+      type: "demon",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "orthodontist",
+      name: "Orthodontist",
+      nameRu: "Ортодонт",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "washerwoman",
+      name: "Washerwoman",
+      nameRu: "Прачка",
+      type: "townsfolk",
+      firstNight: 1,
+      otherNights: null,
+    },
+    {
+      id: "virgin",
+      name: "Virgin",
+      nameRu: "Девственница",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "tea_lady",
+      name: "Tea Lady",
+      nameRu: "Чайная Леди",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+    {
+      id: "towncrier",
+      name: "towncrier",
+      nameRu: "Глашатай",
+      type: "townsfolk",
+      firstNight: null,
+      otherNights: null,
+    },
+  ]); // роли всего сценария
+  const [playersRoles, setPlayersRoles] = useState([]); // роли игроков
   const [showSelectedOnly, setShowSelectedOnly] = useState(false);
   const [playerCount, setPlayerCount] = useState(5);
   const [hiddenPlayerCount, hidePlayerCount] = useState(false);
@@ -64,6 +306,12 @@ function App() {
                   setSelectedRoles={setSelectedRoles}
                   showSelectedOnly={showSelectedOnly}
                   setShowSelectedOnly={setShowSelectedOnly}
+                  hiddenPlayerCount={hiddenPlayerCount}
+                  hidePlayerCount={hidePlayerCount}
+                  playerCount={playerCount}
+                  setPlayerCount={setPlayerCount}
+                  playersRoles={playersRoles}
+                  setPlayersRoles={setPlayersRoles}
                 />
               }
             />

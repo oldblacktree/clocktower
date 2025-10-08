@@ -1,7 +1,4 @@
 import { useState } from "react";
-import { roleLayouts as roleLayoutsAll } from "../data/roles";
-
-let roleLayouts;
 
 export default function Setup({
   selectedRoles,
@@ -10,13 +7,13 @@ export default function Setup({
   hiddenPlayerCount,
   hidePlayerCount,
 }) {
-  const increasePlayers = () =>
-    setPlayerCount((prev) => Math.min(prev + 1, 15));
-  const decreasePlayers = () => setPlayerCount((prev) => Math.max(prev - 1, 5));
+  // const increasePlayers = () =>
+  //   setPlayerCount((prev) => Math.min(prev + 1, 15));
+  // const decreasePlayers = () => setPlayerCount((prev) => Math.max(prev - 1, 5));
 
   return (
     <>
-      {!hiddenPlayerCount && (
+      {/* {!hiddenPlayerCount && (
         <div className="p-4 flex flex-col items-center justify-center space-y-6">
           <h1 className="text-2xl font-bold">Количество игроков :</h1>
 
@@ -71,8 +68,8 @@ export default function Setup({
           >
             Изменить
           </button>
-        </div>
-      )}
+        </div> */}
+      {/* )} */}
     </>
   );
 }
