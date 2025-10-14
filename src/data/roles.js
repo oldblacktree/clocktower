@@ -1184,3 +1184,35 @@ export const roleLayouts = {
     townsfolks: 9,
   },
 };
+
+// Стандартные сценарии
+const troubleBrewing = {
+  id: "trouble-brewing",
+  name: "Trouble Brewing",
+  roles: [
+    "washerwoman",
+    "librarian",
+    "investigator",
+    "chef",
+    "empath",
+    "fortuneteller",
+    "undertaker",
+    "monk",
+    "ravenkeeper",
+    "virgin",
+    "slayer",
+    "soldier",
+    "mayor",
+    "butler",
+    "drunk",
+    "recluse",
+    "saint",
+    "poisoner",
+    "spy",
+    "scarletwoman",
+    "baron",
+    "imp",
+  ],
+};
+
+export const scenariosStandart = [troubleBrewing];

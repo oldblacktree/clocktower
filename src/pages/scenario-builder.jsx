@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { roles as rolesAll } from "../data/roles";
 import { roleLayouts as roleLayoutsAll } from "../data/roles";
+import { useNavigate } from "react-router-dom";
 
 let roleLayouts;
 
@@ -16,11 +17,35 @@ export default function ScenarioBuilder({
   playersRoles,
   setPlayersRoles,
 }) {
+  const navigate = useNavigate();
   // если включен режим "только выбранные", то фильтруем массив
 
-  const increasePlayers = () =>
-    setPlayerCount((prev) => Math.min(prev + 1, 15));
-  const decreasePlayers = () => setPlayerCount((prev) => Math.max(prev - 1, 5));
+  const [scenarioName, setScenarioName] = useState("");
+  const [saveMessage, setSaveMessage] = useState("");
+
+  const saveScenario = () => {
+    if (!scenarioName.trim()) {
+      setSaveMessage("Введите название сценария!");
+      return;
+    }
+
+    const newScenario = {
+      id: Date.now(),
+      name: scenarioName,
+      roles: selectedRoles.map((item) => item.id),
+    };
+
+    const existing = JSON.parse(localStorage.getItem("customScenarios")) || [];
+    const updated = [...existing, newScenario];
+    localStorage.setItem("customScenarios", JSON.stringify(updated));
+
+    setSaveMessage(`Сценарий "${scenarioName}" сохранён!`);
+    navigate("/");
+  };
+
+  // const increasePlayers = () =>
+  //   setPlayerCount((prev) => Math.min(prev + 1, 15));
+  // const decreasePlayers = () => setPlayerCount((prev) => Math.max(prev - 1, 5));
 
   const toggleRoleScenario = (role) => {
     if (selectedRoles.find((r) => r.id === role.id)) {
@@ -45,7 +70,7 @@ export default function ScenarioBuilder({
   return (
     <div className="p-4 space-y-6">
       {/* Выбор количества игроков*/}
-      {showSelectedOnly && (
+      {/* {showSelectedOnly && (
         <div>
           {!hiddenPlayerCount && (
             <div className="p-4 flex flex-col items-center justify-center space-y-6">
@@ -105,7 +130,7 @@ export default function ScenarioBuilder({
             </div>
           )}
         </div>
-      )}
+      )} */}
 
       {/* Кнопки как выбирать роли */}
       {showSelectedOnly && (
@@ -340,6 +365,23 @@ export default function ScenarioBuilder({
             ? "Вернуться к выбору ролей"
             : "Показать выбранные роли"}
         </button>
+
+        {/* Поле и кнопка сохранения */}
+        <div className="flex items-center space-x-2">
+          <input
+            type="text"
+            value={scenarioName}
+            onChange={(e) => setScenarioName(e.target.value)}
+            placeholder="Название сценария"
+            className="flex-1 p-2 rounded bg-gray-700 text-white placeholder-gray-400"
+          />
+          <button
+            onClick={saveScenario}
+            className="px-4 py-2 bg-green-600 rounded font-semibold hover:bg-green-500"
+          >
+            Сохранить
+          </button>
+        </div>
       </div>
     </div>
   );
