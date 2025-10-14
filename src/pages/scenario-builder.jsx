@@ -258,7 +258,7 @@ export default function ScenarioBuilder({
       )}
 
       {/* выбранные роли для сценария */}
-      {showSelectedOnly && (
+      {/* {showSelectedOnly && (
         <div>
           <h4 className={`text-yellow-500  text-lg`}>Горожане</h4>
           <div className="grid grid-cols-4 gap-4 py-2">
@@ -353,7 +353,7 @@ export default function ScenarioBuilder({
               })}
           </div>
         </div>
-      )}
+      )} */}
 
       {/* Фиксированная кнопка снизу */}
       <div className="fixed bottom-0 left-0 right-0 bg-gray-800 ">

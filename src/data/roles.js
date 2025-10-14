@@ -1215,4 +1215,27 @@ const troubleBrewing = {
   ],
 };
 
+//  const scenario =  {
+//         id: 1760460779286,
+//         name: "scenario2",
+//         roles: [
+//             "alchemist",
+//             "balloonist",
+//             "clockmaker",
+//             "banshee",
+//             "hermit",
+//             "heretic",
+//             "barber",
+//             "tinker",
+//             "summoner",
+//             "psychopath",
+//             "devils_advocate",
+//             "baron",
+//             "po",
+//             "pukka",
+//             "nodashii",
+//             "alhadikhia"
+//         ]
+//     }
+
 export const scenariosStandart = [troubleBrewing];
