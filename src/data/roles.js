@@ -289,7 +289,7 @@ export const roles = [
     otherNights: null,
   },
   {
-    id: "devils_advocate",
+    id: "devilsadvocate",
     name: "Devil's Advocate",
     nameRu: "Искусительный Демон",
     type: "minion",
@@ -377,7 +377,7 @@ export const roles = [
     otherNights: null,
   },
   {
-    id: "fortune_teller",
+    id: "fortuneteller",
     name: "Fortune Teller",
     nameRu: "Гадалка",
     type: "townsfolk",
@@ -417,8 +417,8 @@ export const roles = [
     otherNights: null,
   },
   {
-    id: "high_priestess",
-    name: "High_pristess",
+    id: "highpriestess",
+    name: "High pristess",
     nameRu: "Верховная жрица",
     type: "townsfolk",
     firstNight: null,
@@ -681,7 +681,7 @@ export const roles = [
     otherNights: null,
   },
   {
-    id: "scarlet_woman",
+    id: "scarletwoman",
     name: "Scarlet Woman",
     nameRu: "Багровая Дама",
     type: "minion",
@@ -753,7 +753,7 @@ export const roles = [
     otherNights: null,
   },
   {
-    id: "tea_lady",
+    id: "tealady",
     name: "Tea Lady",
     nameRu: "Чайная Леди",
     type: "townsfolk",
@@ -777,7 +777,7 @@ export const roles = [
     otherNights: 4,
   },
   {
-    id: "village_idiot",
+    id: "villageidiot",
     name: "Villageidiot",
     nameRu: "Дурачок",
     type: "townsfolk",
@@ -1187,7 +1187,7 @@ export const roleLayouts = {
 
 // Стандартные сценарии
 const troubleBrewing = {
-  id: "trouble-brewing",
+  id: "troubleBrewing",
   name: "Trouble Brewing",
   roles: [
     "washerwoman",
@@ -1215,27 +1215,70 @@ const troubleBrewing = {
   ],
 };
 
-//  const scenario =  {
-//         id: 1760460779286,
-//         name: "scenario2",
-//         roles: [
-//             "alchemist",
-//             "balloonist",
-//             "clockmaker",
-//             "banshee",
-//             "hermit",
-//             "heretic",
-//             "barber",
-//             "tinker",
-//             "summoner",
-//             "psychopath",
-//             "devils_advocate",
-//             "baron",
-//             "po",
-//             "pukka",
-//             "nodashii",
-//             "alhadikhia"
-//         ]
-//     }
+const badMoonRising = {
+  id: "badMoonRising",
+  name: "Bad Moon Rising",
+  nameRu: "Bad Moon Rising",
+  roles: [
+    "gambler",
+    "grandmother",
+    "sailor",
+    "innkeeper",
+    "exorcist",
+    "chambermaid",
+    "gossip",
+    "courtier",
+    "professor",
+    "minstrel",
+    "tealady",
+    "pacifist",
+    "fool",
+    "goon",
+    "tinker",
+    "lunatic",
+    "moonchild",
+    "godfather",
+    "assassin",
+    "mastermind",
+    "devilsadvocate",
+    "zombuul",
+    "imp",
+    "pukka",
+    "po",
+  ],
+};
 
-export const scenariosStandart = [troubleBrewing];
+const sectsViolets = {
+  id: "sectsViolets",
+  name: "Sects & Violets",
+  nameRu: "Sect & Violets",
+  roles: [
+    "clockmaker",
+    "dreamer",
+    "snakecharmer",
+    "mathematician",
+    "flowergirl",
+    "towncrier",
+    "oracle",
+    "savant",
+    "seamstress",
+    "philosopher",
+    "artist",
+    "juggler",
+    "sage",
+    "mutant",
+    "klutz",
+    "sweetheart",
+    "barber",
+    "pithag",
+    "cerenovus",
+    "witch",
+    "eviltwin",
+    "vigormortis",
+    "fanggu",
+    "nodashii",
+    "vortox",
+  ],
+};
+
+export const scenariosStandart = [troubleBrewing, badMoonRising, sectsViolets];

@@ -356,15 +356,15 @@ export default function ScenarioBuilder({
       )} */}
 
       {/* Фиксированная кнопка снизу */}
-      <div className="fixed bottom-0 left-0 right-0 bg-gray-800 ">
-        <button
+      <div className="fixed top-0 left-0 right-0 bg-gray-800 ">
+        {/* <button
           onClick={() => setShowSelectedOnly(!showSelectedOnly)}
           className="w-full py-2 text-lg font-semibold transition bg-gray-800 text-indigo-300 border border-yellow-500"
         >
           {showSelectedOnly
             ? "Вернуться к выбору ролей"
             : "Показать выбранные роли"}
-        </button>
+        </button> */}
 
         {/* Поле и кнопка сохранения */}
         <div className="flex items-center space-x-2">

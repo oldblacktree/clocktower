@@ -32,7 +32,7 @@ function App() {
     <BrowserRouter>
       <div className="flex flex-col h-screen">
         {/* Верхняя панель навигации */}
-        <nav className="flex justify-around bg-gray-800 text-white">
+        {/* <nav className="flex justify-around bg-gray-800 text-white">
           <NavLink
             to="/scenario"
             className={({ isActive }) =>
@@ -68,7 +68,7 @@ function App() {
           >
             Ночь
           </NavLink>
-        </nav>
+        </nav> */}
 
         {/* Основное содержимое */}
         <div className="flex-1 overflow-y-auto">

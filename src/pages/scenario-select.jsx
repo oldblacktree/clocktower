@@ -103,11 +103,64 @@ export default function ScenarioSelect({ setSelectedRoles }) {
                           // e.stopPropagation(); // чтобы не срабатывал выбор сценария
                           deleteScenario(scenario.id);
                         }}
-                        className="p-2 right-2 text-gray-300 bg-red-800  transition w-20"
+                        className="right-2 text-gray-300 bg-red-800  transition w-10 text-3xl"
                         title="Удалить сценарий"
                       >
                         🗑
                       </button>
+                    </div>
+                    {/* Если этот сценарий выбран — показываем кнопки */}
+                    {selectedScenarioId === scenario.id && (
+                      <div className=" flex gap-2 mt-1">
+                        <button
+                          onClick={(e) => {
+                            handleShowScenarioRolesClick(scenario);
+                          }}
+                          className="flex-1 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 transition"
+                        >
+                          Посмотреть роли
+                        </button>
+
+                        <button
+                          onClick={(e) => {
+                            handleShowScenarioRolesClick(scenario);
+                          }}
+                          className="flex-1 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition"
+                        >
+                          Выбрать
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Список стандартных сценариев */}
+          {customScenarios.length > 0 && (
+            <div>
+              <h2 className="text-lg font-semibold text-gray-200 mb-2">
+                Стандартные сценарии
+              </h2>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {scenariosStandart.map((scenario) => (
+                  <div key={scenario.id}>
+                    <div
+                      className={`text-white transition flex border ${
+                        selectedScenarioId === scenario.id
+                          ? "border-yellow-200"
+                          : "border-transparent"
+                      }`}
+                    >
+                      <div
+                        className="w-100 p-2 bg-gray-800 "
+                        onClick={() => handleScenarioClick(scenario.id)}
+                      >
+                        <h3 className="text-xl font-semibold">
+                          {scenario.name}
+                        </h3>
+                      </div>
                     </div>
                     {/* Если этот сценарий выбран — показываем кнопки */}
                     {selectedScenarioId === scenario.id && (
