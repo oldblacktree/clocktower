@@ -39,10 +39,10 @@ export default function ScenarioSelect({ setSelectedRoles }) {
   }, []);
 
   // Открыть выбранный сценарий
-  const openScenario = (scenario) => {
-    setSelectedRoles(scenario.roles);
-    navigate("/scenario");
-  };
+  // const openScenario = (scenario) => {
+  //   setSelectedRoles(scenario.roles);
+  //   navigate("/scenario");
+  // };
 
   // Удалить сценарий
   const deleteScenario = (id) => {
@@ -54,14 +54,14 @@ export default function ScenarioSelect({ setSelectedRoles }) {
     localStorage.setItem("customScenarios", JSON.stringify(updated));
   };
 
-  const selectScenario = (scenario) => {
-    setSelectedRoles(scenario.roles);
-    navigate("/scenario");
-  };
+  // const selectScenario = (scenario) => {
+  //   setSelectedRoles(scenario.roles);
+  //   navigate("/scenario");
+  // };
 
   const createCustomScenario = () => {
     setSelectedRoles([]);
-    navigate("/scenario");
+    navigate("/scenario-builder");
   };
 
   return (
@@ -202,20 +202,28 @@ export default function ScenarioSelect({ setSelectedRoles }) {
       {showScenarioRoles && (
         <div>
           <ScenarioRoles roles={rolesObjects} />
-          {/* <div
-            onClick={() => setShowScenarioRoles(false)}
-            className="p-4 bg-indigo-800 text-white rounded-xl transition"
-          >
-            <h2 className="text-xl font-semibold">
-              Вернуться к выбору сценариев
-            </h2>
-          </div> */}
           <div className="fixed bottom-0 left-0 right-0 bg-gray-800 ">
             <button
               onClick={() => setShowScenarioRoles(false)}
-              className="w-full py-2 text-lg font-semibold transition bg-gray-800 text-indigo-300 border border-yellow-500"
+              className="fixed right-3 top-3  w-10 h-10 flex items-center justify-center
+                 bg-gray-800 hover:bg-gray-700 text-yellow-400 rounded-lg 
+                 shadow-lg border border-yellow-500 transition"
+              aria-label="Назад"
             >
-              Вернуться к выбору сценариев
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-5 h-5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M19 12H5" />
+                <path d="M12 19l-7-7 7-7" />
+              </svg>
             </button>
           </div>
         </div>

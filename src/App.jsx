@@ -92,7 +92,7 @@ function App() {
               }
             />
             <Route
-              path="/scenario"
+              path="/scenario-builder"
               element={
                 <ScenarioBuilder
                   selectedRoles={selectedRoles}
@@ -108,7 +108,7 @@ function App() {
                 />
               }
             />
-            <Route
+            {/* <Route
               path="/setup"
               element={
                 <Setup
@@ -120,7 +120,7 @@ function App() {
                 />
               }
             />
-            <Route path="/night-order" element={<Guiding />} />
+            <Route path="/night-order" element={<Guiding />} /> */}
           </Routes>
         </div>
       </div>
