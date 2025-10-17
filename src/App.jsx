@@ -10,6 +10,7 @@ import ScenarioBuilder from "./pages/scenario-builder";
 import Setup from "./pages/setup";
 import Guiding from "./pages/guiding";
 import ScenarioSelect from "./pages/scenario-select";
+import RolePicking from "./pages/role-picking";
 import "./App.css";
 import { roles as allRoles } from "./data/roles";
 
@@ -18,7 +19,6 @@ function App() {
   const [playersRoles, setPlayersRoles] = useState([]); // роли игроков
   const [showSelectedOnly, setShowSelectedOnly] = useState(false);
   const [playerCount, setPlayerCount] = useState(5);
-  const [hiddenPlayerCount, hidePlayerCount] = useState(false);
 
   // Загрузка сохранённого сценария из localStorage
   useEffect(() => {
@@ -99,12 +99,17 @@ function App() {
                   setSelectedRoles={setSelectedRoles}
                   showSelectedOnly={showSelectedOnly}
                   setShowSelectedOnly={setShowSelectedOnly}
-                  hiddenPlayerCount={hiddenPlayerCount}
-                  hidePlayerCount={hidePlayerCount}
-                  playerCount={playerCount}
-                  setPlayerCount={setPlayerCount}
                   playersRoles={playersRoles}
                   setPlayersRoles={setPlayersRoles}
+                />
+              }
+            />
+            <Route
+              path="/role-picking"
+              element={
+                <RolePicking
+                  playerCount={playerCount}
+                  setPlayerCount={setPlayerCount}
                 />
               }
             />

@@ -28,8 +28,13 @@ export default function ScenarioSelect({ setSelectedRoles }) {
 
   const handleShowScenarioRolesClick = (scenario) => {
     let roles = getRolesByIds(scenario.roles);
-    setShowScenarioRoles(true);
     setRolesObjects(roles);
+  };
+
+  const handleChooseScenarioClick = (scenario) => {
+    let roles = getRolesByIds(scenario.roles);
+    setSelectedRoles(roles);
+    navigate("/role-picking");
   };
 
   // Загружаем сценарии из localStorage при загрузке страницы
@@ -37,12 +42,6 @@ export default function ScenarioSelect({ setSelectedRoles }) {
     const stored = JSON.parse(localStorage.getItem("customScenarios")) || [];
     setCustomScenarios(stored);
   }, []);
-
-  // Открыть выбранный сценарий
-  // const openScenario = (scenario) => {
-  //   setSelectedRoles(scenario.roles);
-  //   navigate("/scenario");
-  // };
 
   // Удалить сценарий
   const deleteScenario = (id) => {
@@ -53,11 +52,6 @@ export default function ScenarioSelect({ setSelectedRoles }) {
     setCustomScenarios(updated);
     localStorage.setItem("customScenarios", JSON.stringify(updated));
   };
-
-  // const selectScenario = (scenario) => {
-  //   setSelectedRoles(scenario.roles);
-  //   navigate("/scenario");
-  // };
 
   const createCustomScenario = () => {
     setSelectedRoles([]);
@@ -123,7 +117,7 @@ export default function ScenarioSelect({ setSelectedRoles }) {
 
                         <button
                           onClick={(e) => {
-                            handleShowScenarioRolesClick(scenario);
+                            handleChooseScenarioClick(scenario);
                           }}
                           className="flex-1 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition"
                         >
@@ -176,7 +170,7 @@ export default function ScenarioSelect({ setSelectedRoles }) {
 
                         <button
                           onClick={(e) => {
-                            handleShowScenarioRolesClick(scenario);
+                            handleChooseScenarioClick(scenario);
                           }}
                           className="flex-1 py-2 rounded-lg bg-yellow-600 hover:bg-yellow-500 transition"
                         >
