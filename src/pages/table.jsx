@@ -4,33 +4,20 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [showRolePicker, setShowRolePicker] = useState(false);
 
-  // координаты по овалу
-  const radiusX = 160;
-  const radiusY = 250;
-  const circlePositions = Array.from({ length: playerCount }).map((_, i) => {
-    const angle = (2 * Math.PI * i) / playerCount - Math.PI / 2;
-    const x = Math.cos(angle) * radiusX;
-    const y = Math.sin(angle) * radiusY;
-    return { x, y };
-  });
-
   // роли, которые еще никому не назначены
   const availableRoles = useMemo(
     () => playersRoles.filter((r) => !r.playerNumber),
     [playersRoles]
   );
 
-  // находим роль, назначенную конкретному игроку
   const getRoleForPlayer = (num) =>
     playersRoles.find((r) => r.playerNumber === num);
 
-  // при клике на игрока
   const openRolePicker = (index) => {
     setSelectedPlayer(index + 1);
     setShowRolePicker(true);
   };
 
-  // при выборе роли
   const handleSelectRole = (role) => {
     setPlayersRoles((prev) =>
       prev.map((r) =>
@@ -40,23 +27,60 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
     setShowRolePicker(false);
   };
 
-  // сбросить распределение ролей
   const resetAssignments = () =>
     setPlayersRoles((prev) => prev.map((r) => ({ ...r, playerNumber: null })));
 
+  // Генерация позиций по сторонам прямоугольника
+  const width = 300; // ширина прямоугольника
+  const height = 200; // высота прямоугольника
+  const margin = 20; // отступы от углов
+
+  const positions = [];
+  if (playerCount === 1) {
+    positions.push({ x: width / 2, y: 0 });
+  } else {
+    const perSide = Math.ceil(playerCount / 4);
+
+    // Верх
+    for (let i = 0; i < perSide && positions.length < playerCount; i++) {
+      positions.push({
+        x: margin + ((width - 2 * margin) * i) / (perSide - 1),
+        y: 0,
+      });
+    }
+
+    // Правый
+    for (let i = 0; i < perSide && positions.length < playerCount; i++) {
+      positions.push({
+        x: width,
+        y: margin + ((height - 2 * margin) * i) / (perSide - 1),
+      });
+    }
+
+    // Низ
+    for (let i = perSide - 1; i >= 0 && positions.length < playerCount; i--) {
+      positions.push({
+        x: margin + ((width - 2 * margin) * i) / (perSide - 1),
+        y: height,
+      });
+    }
+
+    // Левый
+    for (let i = perSide - 1; i >= 0 && positions.length < playerCount; i--) {
+      positions.push({
+        x: 0,
+        y: margin + ((height - 2 * margin) * i) / (perSide - 1),
+      });
+    }
+  }
+
   return (
-    <div className="flex flex-col items-center justify-center h-full relative">
+    <div className="flex flex-col items-center justify-center h-full relative p-4">
       <h1 className="text-xl font-bold mb-4">Рассадка игроков</h1>
 
-      {/* Игровой овал */}
-      <div className="relative w-[320px] h-[300px] flex items-center justify-center">
-        {/* Центральный ведущий */}
-        <div className="absolute w-16 h-16 bg-yellow-600 rounded-full flex items-center justify-center text-white font-bold shadow-lg">
-          🎭
-        </div>
-
-        {/* Игроки */}
-        {circlePositions.map((pos, i) => {
+      {/* Контейнер прямоугольника */}
+      <div className="relative w-[320px] h-[220px] border-2 border-gray-600">
+        {positions.map((pos, i) => {
           const playerNum = i + 1;
           const role = getRoleForPlayer(playerNum);
 
@@ -71,8 +95,8 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
                     : "border-gray-600 bg-gray-700 hover:border-yellow-400"
                 }`}
               style={{
-                left: `calc(50% + ${pos.x}px - 2rem)`,
-                top: `calc(50% + ${pos.y}px - 2rem)`,
+                left: pos.x - 32 / 2, // центрируем кружок
+                top: pos.y - 32 / 2,
               }}
             >
               {role ? (
