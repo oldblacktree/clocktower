@@ -113,22 +113,14 @@ function App() {
             <Route
               path="/table"
               element={
-                <Table playerCount={playerCount} playersRoles={playersRoles} />
-              }
-            />
-            {/* <Route
-              path="/setup"
-              element={
-                <Setup
-                  selectedRoles={selectedRoles}
+                <Table
                   playerCount={playerCount}
-                  setPlayerCount={setPlayerCount}
-                  hiddenPlayerCount={hiddenPlayerCount}
-                  hidePlayerCount={hidePlayerCount}
+                  playersRoles={playersRoles}
+                  scenarioRoles={scenarioRoles}
+                  setPlayersRoles={setPlayersRoles}
                 />
               }
             />
-            <Route path="/night-order" element={<Guiding />} /> */}
           </Routes>
         </div>
       </div>
