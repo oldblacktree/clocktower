@@ -4,7 +4,7 @@ import { roles as rolesObjectAll } from "../data/roles";
 import { scenariosStandart } from "../data/roles";
 import ScenarioRoles from "../components/ScenarioRoles";
 
-export default function ScenarioSelect({ setSelectedRoles }) {
+export default function ScenarioSelect({ setScenarioRoles }) {
   const navigate = useNavigate();
   const [customScenarios, setCustomScenarios] = useState([]);
   const [selectedScenarioId, setSelectedScenarioId] = useState(null);
@@ -29,11 +29,12 @@ export default function ScenarioSelect({ setSelectedRoles }) {
   const handleShowScenarioRolesClick = (scenario) => {
     let roles = getRolesByIds(scenario.roles);
     setRolesObjects(roles);
+    setShowScenarioRoles(true);
   };
 
   const handleChooseScenarioClick = (scenario) => {
     let roles = getRolesByIds(scenario.roles);
-    setSelectedRoles(roles);
+    setScenarioRoles(roles);
     navigate("/role-picking");
   };
 
@@ -54,7 +55,7 @@ export default function ScenarioSelect({ setSelectedRoles }) {
   };
 
   const createCustomScenario = () => {
-    setSelectedRoles([]);
+    setScenarioRoles([]);
     navigate("/scenario-builder");
   };
 

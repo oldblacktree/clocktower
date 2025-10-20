@@ -7,24 +7,22 @@ import {
   useNavigate,
 } from "react-router-dom";
 import ScenarioBuilder from "./pages/scenario-builder";
-import Setup from "./pages/setup";
-import Guiding from "./pages/guiding";
 import ScenarioSelect from "./pages/scenario-select";
+import Table from "./pages/table";
 import RolePicking from "./pages/role-picking";
 import "./App.css";
 import { roles as allRoles } from "./data/roles";
 
 function App() {
-  const [selectedRoles, setSelectedRoles] = useState([]); // роли всего сценария
+  const [scenarioRoles, setScenarioRoles] = useState([]); // роли всего сценария
   const [playersRoles, setPlayersRoles] = useState([]); // роли игроков
-  const [showSelectedOnly, setShowSelectedOnly] = useState(false);
   const [playerCount, setPlayerCount] = useState(5);
 
   // Загрузка сохранённого сценария из localStorage
   useEffect(() => {
     const saved = localStorage.getItem("customScenario");
     if (saved) {
-      setSelectedRoles(JSON.parse(saved));
+      setScenarioRoles(JSON.parse(saved));
     }
   }, []);
 
@@ -77,7 +75,7 @@ function App() {
               path="/"
               element={
                 <ScenarioSelect
-                  setSelectedRoles={setSelectedRoles}
+                  setScenarioRoles={setScenarioRoles}
                   allRoles={allRoles}
                 />
               }
@@ -86,7 +84,7 @@ function App() {
               path="/clocktower"
               element={
                 <ScenarioSelect
-                  setSelectedRoles={setSelectedRoles}
+                  setScenarioRoles={setScenarioRoles}
                   allRoles={allRoles}
                 />
               }
@@ -95,12 +93,8 @@ function App() {
               path="/scenario-builder"
               element={
                 <ScenarioBuilder
-                  selectedRoles={selectedRoles}
-                  setSelectedRoles={setSelectedRoles}
-                  showSelectedOnly={showSelectedOnly}
-                  setShowSelectedOnly={setShowSelectedOnly}
-                  playersRoles={playersRoles}
-                  setPlayersRoles={setPlayersRoles}
+                  scenarioRoles={scenarioRoles}
+                  setScenarioRoles={setScenarioRoles}
                 />
               }
             />
@@ -110,7 +104,16 @@ function App() {
                 <RolePicking
                   playerCount={playerCount}
                   setPlayerCount={setPlayerCount}
+                  scenarioRoles={scenarioRoles}
+                  playersRoles={playersRoles}
+                  setPlayersRoles={setPlayersRoles}
                 />
+              }
+            />
+            <Route
+              path="/table"
+              element={
+                <Table playerCount={playerCount} playersRoles={playersRoles} />
               }
             />
             {/* <Route

@@ -1,4 +1,4 @@
-export default function Guiding() {
+export default function Table() {
   return (
     <div className="p-4">
       <h1 className="text-xl font-bold">Ночной порядок</h1>
