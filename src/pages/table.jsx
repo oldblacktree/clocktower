@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 
 export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
@@ -30,57 +30,71 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
   const resetAssignments = () =>
     setPlayersRoles((prev) => prev.map((r) => ({ ...r, playerNumber: null })));
 
-  // Генерация позиций по сторонам прямоугольника
-  const width = 300; // ширина прямоугольника
-  const height = 200; // высота прямоугольника
-  const margin = 20; // отступы от углов
+  // размеры овала (адаптированы под экран телефона 1080x2400)
+  const radiusX = 330; // ширина (чуть меньше половины экрана)
+  const radiusY = 150; // высота (вытянут вверх)
 
-  const positions = [];
-  if (playerCount === 1) {
-    positions.push({ x: width / 2, y: 0 });
-  } else {
-    const perSide = Math.ceil(playerCount / 4);
+  // === РАВНОМЕРНОЕ распределение точек по длине эллипса ===
+  const generateEvenlySpacedPoints = (n) => {
+    const steps = 500; // дискретизация для приближения длины
+    const angles = Array.from(
+      { length: steps + 1 },
+      (_, i) => (i * 2 * Math.PI) / steps
+    );
 
-    // Верх
-    for (let i = 0; i < perSide && positions.length < playerCount; i++) {
-      positions.push({
-        x: margin + ((width - 2 * margin) * i) / (perSide - 1),
-        y: 0,
-      });
+    // длина малых дуг
+    const ds = [];
+    let totalLength = 0;
+    for (let i = 0; i < steps; i++) {
+      const t1 = angles[i];
+      const t2 = angles[i + 1];
+      const dx = radiusX * (Math.cos(t2) - Math.cos(t1));
+      const dy = radiusY * (Math.sin(t2) - Math.sin(t1));
+      const d = Math.sqrt(dx * dx + dy * dy);
+      ds.push(d);
+      totalLength += d;
     }
 
-    // Правый
-    for (let i = 0; i < perSide && positions.length < playerCount; i++) {
-      positions.push({
-        x: width,
-        y: margin + ((height - 2 * margin) * i) / (perSide - 1),
-      });
+    // равномерное распределение точек по длине
+    const segmentLength = totalLength / n;
+    const points = [];
+    let currentLength = 0;
+    let target = segmentLength / 2; // чтобы 1-й игрок был снизу
+
+    for (let i = 0; i < steps; i++) {
+      currentLength += ds[i];
+      if (currentLength >= target) {
+        const angle = angles[i];
+        points.push({
+          x: radiusX * Math.cos(angle),
+          y: radiusY * Math.sin(angle),
+        });
+        target += segmentLength;
+      }
     }
 
-    // Низ
-    for (let i = perSide - 1; i >= 0 && positions.length < playerCount; i--) {
-      positions.push({
-        x: margin + ((width - 2 * margin) * i) / (perSide - 1),
-        y: height,
-      });
-    }
+    return points;
+  };
 
-    // Левый
-    for (let i = perSide - 1; i >= 0 && positions.length < playerCount; i--) {
-      positions.push({
-        x: 0,
-        y: margin + ((height - 2 * margin) * i) / (perSide - 1),
-      });
-    }
-  }
+  const circlePositions = useMemo(
+    () => generateEvenlySpacedPoints(playerCount),
+    [playerCount]
+  );
+
+  // вращаем, чтобы первый игрок был снизу
+  const rotatedPositions = circlePositions.map((pos) => ({
+    x: pos.x * Math.cos(Math.PI / 2) - pos.y * Math.sin(Math.PI / 2),
+    y: pos.x * Math.sin(Math.PI / 2) + pos.y * Math.cos(Math.PI / 2),
+  }));
 
   return (
     <div className="flex flex-col items-center justify-center h-full relative p-4">
       <h1 className="text-xl font-bold mb-4">Рассадка игроков</h1>
 
-      {/* Контейнер прямоугольника */}
-      <div className="relative w-[320px] h-[220px] border-2 border-gray-600">
-        {positions.map((pos, i) => {
+      {/* Игровой овал */}
+      <div className="relative w-[360px] h-[770px] flex items-center justify-center">
+        {/* Игроки */}
+        {rotatedPositions.map((pos, i) => {
           const playerNum = i + 1;
           const role = getRoleForPlayer(playerNum);
 
@@ -88,15 +102,15 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
             <div
               key={playerNum}
               onClick={() => openRolePicker(i)}
-              className={`absolute w-16 h-16 rounded-full border-4 cursor-pointer flex items-center justify-center transition
+              className={`absolute w-20 h-20 rounded-full border-4 cursor-pointer flex items-center justify-center transition
                 ${
                   role
                     ? "border-green-400 bg-gray-800"
                     : "border-gray-600 bg-gray-700 hover:border-yellow-400"
                 }`}
               style={{
-                left: pos.x - 32 / 2, // центрируем кружок
-                top: pos.y - 32 / 2,
+                left: `calc(50% + ${pos.x}px - 2.5rem)`,
+                top: `calc(50% + ${pos.y}px - 2rem)`,
               }}
             >
               {role ? (
@@ -141,7 +155,7 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
                   <div
                     key={role.id}
                     onClick={() => handleSelectRole(role)}
-                    className="w-16 h-16 rounded-full overflow-hidden border-2 border-transparent hover:border-yellow-400 transition cursor-pointer bg-[#23343b]"
+                    className="w-20 h-20 rounded-full overflow-hidden border-2 border-transparent hover:border-yellow-400 transition cursor-pointer bg-[#23343b]"
                   >
                     <img
                       src={`${import.meta.env.BASE_URL}/assets/roles/${
