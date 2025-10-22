@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import ScenarioBuilder from "./pages/scenario-builder";
 import ScenarioSelect from "./pages/scenario-select";
-import Table from "./pages/table";
+import PlayersRoles from "./pages/players-roles";
 import RolePicking from "./pages/role-picking";
 import "./App.css";
 import { roles as allRoles } from "./data/roles";
@@ -111,9 +111,20 @@ function App() {
               }
             />
             <Route
+              path="/players-roles"
+              element={
+                <PlayersRoles
+                  playerCount={playerCount}
+                  playersRoles={playersRoles}
+                  scenarioRoles={scenarioRoles}
+                  setPlayersRoles={setPlayersRoles}
+                />
+              }
+            />
+            <Route
               path="/table"
               element={
-                <Table
+                <PlayersRoles
                   playerCount={playerCount}
                   playersRoles={playersRoles}
                   scenarioRoles={scenarioRoles}

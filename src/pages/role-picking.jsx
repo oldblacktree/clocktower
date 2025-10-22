@@ -30,7 +30,7 @@ export default function RolePicking({
   };
 
   const handleStartGameClick = () => {
-    navigate("/table");
+    navigate("/players-roles");
   };
 
   return (

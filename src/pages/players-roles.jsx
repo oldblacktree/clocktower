@@ -1,11 +1,49 @@
 import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
+export default function PlayersRoles({
+  playerCount,
+  playersRoles,
+  setPlayersRoles,
+}) {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
   const [showRolePicker, setShowRolePicker] = useState(false);
 
   const navigate = useNavigate();
+
+  // роли, которые еще никому не назначены
+  const availableRoles = playersRoles.filter((r) => !r.playerNumber);
+
+  const getRoleForPlayer = (num) =>
+    playersRoles.find((r) => r.playerNumber === num);
+
+  const openRolePicker = (index) => {
+    setSelectedPlayer(index + 1);
+    setShowRolePicker(true);
+  };
+
+  const handleSelectRole = (newRole) => {
+    setPlayersRoles((prev) =>
+      prev.map((r) => {
+        // 1️⃣ Снимаем роль с игрока, если у роли был этот игрок
+        if (r.playerNumber === selectedPlayer) {
+          return { ...r, playerNumber: null };
+        }
+
+        // 2️⃣ Назначаем выбранную роль игроку
+        if (r.id === newRole.id) {
+          return { ...r, playerNumber: selectedPlayer };
+        }
+
+        return r;
+      })
+    );
+
+    setShowRolePicker(false);
+  };
+
+  const resetAssignments = () =>
+    setPlayersRoles((prev) => prev.map((r) => ({ ...r, playerNumber: null })));
 
   // размеры овала (адаптированы под экран телефона 1080x2400)
   const radiusX = 330;
@@ -66,6 +104,8 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
 
   return (
     <div className="flex flex-col items-center justify-center h-full relative p-4">
+      <h1 className="text-xl font-bold mb-4">Игроки тянут роли</h1>
+
       {/* Игровой овал */}
       <div className="relative w-[360px] h-[770px] flex items-center justify-center">
         {/* Игроки */}
@@ -77,7 +117,12 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
             <div
               key={playerNum}
               onClick={() => openRolePicker(i)}
-              className={`absolute w-20 h-20 rounded-full border-2 cursor-pointer flex items-center justify-center transition bg-[#23343b] border-green-200`}
+              className={`absolute w-20 h-20 rounded-full border-2 cursor-pointer flex items-center justify-center transition bg-[#23343b]
+                ${
+                  role
+                    ? "border-green-200 bg-[#23343b]"
+                    : "border-gray-700 bg-[#23343b]"
+                }`}
               style={{
                 left: `calc(50% + ${pos.x}px - 2.5rem)`,
                 top: `calc(50% + ${pos.y}px - 2rem)`,
@@ -125,10 +170,10 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-gray-900 p-4 rounded-xl max-w-sm w-full text-center relative">
             <div className="text-lg font-semibold text-white mb-3 relative">
-              <span>Выберите статус игроку {selectedPlayer}</span>
+              <span>Выберите роль игроку {selectedPlayer}</span>
             </div>
 
-            {/* {availableRoles.length === 0 ? (
+            {availableRoles.length === 0 ? (
               <p className="text-gray-400 mb-3">Все роли уже назначены</p>
             ) : (
               <div className="grid grid-cols-4 gap-3">
@@ -148,7 +193,7 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
                   </div>
                 ))}
               </div>
-            )} */}
+            )}
 
             <button
               onClick={() => setShowRolePicker(false)}
