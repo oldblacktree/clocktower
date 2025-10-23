@@ -33,6 +33,34 @@ export default function RolePicking({
     navigate("/players-roles");
   };
 
+  // 🔹 функция для случайного выбора ролей
+  const handleRandomGenerate = () => {
+    if (!hiddenPlayerCount) return;
+
+    const layout = roleLayoutsAll[playerCount];
+    if (!layout) return;
+
+    const demons = getRandomItems(
+      scenarioRoles.filter((r) => r.type === "demon"),
+      layout.demons
+    );
+    const minions = getRandomItems(
+      scenarioRoles.filter((r) => r.type === "minion"),
+      layout.minions
+    );
+    const outsiders = getRandomItems(
+      scenarioRoles.filter((r) => r.type === "outsider"),
+      layout.outsiders
+    );
+    const townsfolks = getRandomItems(
+      scenarioRoles.filter((r) => r.type === "townsfolk"),
+      layout.townsfolks
+    );
+
+    const newRoles = [...demons, ...minions, ...outsiders, ...townsfolks];
+    setPlayersRoles(newRoles);
+  };
+
   return (
     <div className="p-4 flex flex-col items-center">
       {/* Выбор количества игроков*/}
@@ -73,12 +101,11 @@ export default function RolePicking({
           </div>
         )}
         {hiddenPlayerCount && (
-          <div className="p-2 flex items-center justify-between">
+          <div className="p-2 flex items-center justify-between w-full">
             <span className="text-base font-semibold transition w-30">
               {playerCount} игроков:
             </span>
             <span className="text-xl font-semibold transition text-indigo-300 w-30">
-              {" "}
               {roleLayoutsAll[playerCount].demons}/
               {roleLayoutsAll[playerCount].minions}/
               {roleLayoutsAll[playerCount].outsiders}/
@@ -95,127 +122,93 @@ export default function RolePicking({
           </div>
         )}
       </div>
+
+      {/* 🔹 кнопка случайной генерации */}
+      {hiddenPlayerCount && (
+        <button
+          onClick={handleRandomGenerate}
+          className="my-4 px-6 py-2 bg-purple-700 text-white rounded-lg hover:bg-purple-800 active:scale-95 transition"
+        >
+          🎲 Сгенерировать случайно
+        </button>
+      )}
+
       {/* Все роли */}
       <h1 className="text-2xl font-bold text-yellow-400 mb-4 my-4">
         Выбери роли которые будут в игре
       </h1>
+
       <div>
-        <h4 className={`text-yellow-500  text-lg`}>Горожане</h4>
-        <div className="grid grid-cols-4 gap-4 py-2">
-          {scenarioRoles
-            .filter((item) => item.type === "townsfolk")
-            .map((role) => {
-              const isSelected = playersRoles.some((r) => r.id === role.id);
-              return (
-                <div
-                  key={role.id}
-                  onClick={() => togglePlayersRole(role)}
-                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#23343b]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
-                >
-                  <img
-                    src={`${import.meta.env.BASE_URL}/assets/roles/${
-                      role.id
-                    }.png`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              );
-            })}
-        </div>
-        <h4 className={`text-yellow-500 text-lg`}>Изгои</h4>
-        <div className="grid grid-cols-4 gap-4 py-2">
-          {scenarioRoles
-            .filter((item) => item.type === "outsider")
-            .map((role) => {
-              const isSelected = playersRoles.some((r) => r.id === role.id);
-              return (
-                <div
-                  key={role.id}
-                  onClick={() => togglePlayersRole(role)}
-                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#192429]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
-                >
-                  <img
-                    src={`${import.meta.env.BASE_URL}/assets/roles/${
-                      role.id
-                    }.png`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              );
-            })}
-        </div>
-        <h4 className={`text-yellow-500  text-lg`}>Приспешники</h4>
-        <div className="grid grid-cols-4 gap-4 py-2">
-          {scenarioRoles
-            .filter((item) => item.type === "minion")
-            .map((role) => {
-              const isSelected = playersRoles.some((r) => r.id === role.id);
-              return (
-                <div
-                  key={role.id}
-                  onClick={() => togglePlayersRole(role)}
-                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#312a2b]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
-                >
-                  <img
-                    src={`${import.meta.env.BASE_URL}/assets/roles/${
-                      role.id
-                    }.png`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              );
-            })}
-        </div>
-        <h4 className={`text-yellow-500  text-lg`}>Демоны</h4>
-        <div className="grid grid-cols-4 gap-4 py-2">
-          {scenarioRoles
-            .filter((item) => item.type === "demon")
-            .map((role) => {
-              const isSelected = playersRoles.some((r) => r.id === role.id);
-              return (
-                <div
-                  key={role.id}
-                  onClick={() => togglePlayersRole(role)}
-                  className={`w-20 h-20 rounded-full overflow-hidden border-4 transition bg-[#2f1c1f]
-                  ${isSelected ? "border-purple-500" : "border-transparent"}`}
-                >
-                  <img
-                    src={`${import.meta.env.BASE_URL}/assets/roles/${
-                      role.id
-                    }.png`}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              );
-            })}
-        </div>
+        {["townsfolk", "outsider", "minion", "demon"].map((type) => (
+          <div key={type}>
+            <h4 className="text-yellow-500 text-lg">
+              {
+                {
+                  townsfolk: "Горожане",
+                  outsider: "Изгои",
+                  minion: "Приспешники",
+                  demon: "Демоны",
+                }[type]
+              }
+            </h4>
+            <div className="grid grid-cols-4 gap-4 py-2">
+              {scenarioRoles
+                .filter((item) => item.type === type)
+                .map((role) => {
+                  const isSelected = playersRoles.some((r) => r.id === role.id);
+                  return (
+                    <div
+                      key={role.id}
+                      onClick={() => togglePlayersRole(role)}
+                      className={`w-20 h-20 rounded-full overflow-hidden border-4 transition cursor-pointer
+                        ${
+                          isSelected
+                            ? "border-purple-500"
+                            : "border-transparent"
+                        }
+                        ${
+                          type === "townsfolk"
+                            ? "bg-[#23343b]"
+                            : type === "outsider"
+                            ? "bg-[#192429]"
+                            : type === "minion"
+                            ? "bg-[#312a2b]"
+                            : "bg-[#2f1c1f]"
+                        }`}
+                    >
+                      <img
+                        src={`${import.meta.env.BASE_URL}/assets/roles/${
+                          role.id
+                        }.png`}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        ))}
       </div>
 
       <button
         disabled={playersRoles.length !== playerCount}
-        onClick={() => {
-          handleStartGameClick();
-        }}
-        className={`p-4 bg-indigo-800 text-white w-90 rounded-xl transition
-    ${
-      playersRoles.length !== playerCount
-        ? "bg-gray-500 cursor-not-allowed opacity-60"
-        : "bg-blue-600 hover:bg-blue-700 active:scale-95"
-    }
-  `}
+        onClick={handleStartGameClick}
+        className={`p-4 text-white w-90 rounded-xl transition
+          ${
+            playersRoles.length !== playerCount
+              ? "bg-gray-500 cursor-not-allowed opacity-60"
+              : "bg-blue-600 hover:bg-blue-700 active:scale-95"
+          }`}
       >
-        <h2 className="text-xl font-semibold ">Начать игру</h2>
+        <h2 className="text-xl font-semibold">Начать игру</h2>
       </button>
     </div>
   );
 }
 
+// 🔹 вспомогательная функция для случайного выбора элементов
 function getRandomItems(arr, count = 1) {
   if (!arr || arr.length === 0 || count <= 0) return [];
-
   const copy = [...arr];
   const result = [];
 

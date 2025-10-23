@@ -10,6 +10,7 @@ import ScenarioBuilder from "./pages/scenario-builder";
 import ScenarioSelect from "./pages/scenario-select";
 import PlayersRoles from "./pages/players-roles";
 import RolePicking from "./pages/role-picking";
+import Table from "./pages/table";
 import "./App.css";
 import { roles as allRoles } from "./data/roles";
 
@@ -124,7 +125,7 @@ function App() {
             <Route
               path="/table"
               element={
-                <PlayersRoles
+                <Table
                   playerCount={playerCount}
                   playersRoles={playersRoles}
                   scenarioRoles={scenarioRoles}

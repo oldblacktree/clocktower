@@ -1282,3 +1282,31 @@ const sectsViolets = {
 };
 
 export const scenariosStandart = [troubleBrewing, badMoonRising, sectsViolets];
+
+/*
+
+Объект роли
+
+{
+  "id": "monk",
+  "name": "Monk",
+  "nameRu": "Монах",
+  "type": "townsfolk",
+  "firstNight": "",
+  "otherNights": 5,
+  "playerNumber": 2
+}
+
+
+  {
+    id: "godfather",
+    name: "Godfather",
+    nameRu: "Крёстный отец",
+    type: "minion",
+    firstNight: null,
+    otherNights: null,
+    "playerNumber": 2,
+    outsidersNumberChange: [-1, 1]
+  },
+
+*/

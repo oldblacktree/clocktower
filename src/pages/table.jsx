@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
   const [selectedPlayer, setSelectedPlayer] = useState(null);
-  const [showRolePicker, setShowRolePicker] = useState(false);
+  const [showStatusPicker, setShowStatusPicker] = useState(false);
 
   const navigate = useNavigate();
 
@@ -58,6 +58,8 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
     [playerCount]
   );
 
+  const getRoleForPlayer = (num) =>
+    playersRoles.find((r) => r.playerNumber === num);
   // вращаем, чтобы первый игрок был снизу
   const rotatedPositions = circlePositions.map((pos) => ({
     x: pos.x * Math.cos(Math.PI / 2) - pos.y * Math.sin(Math.PI / 2),
@@ -76,7 +78,7 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
           return (
             <div
               key={playerNum}
-              onClick={() => openRolePicker(i)}
+              onClick={() => setShowStatusPicker(i)}
               className={`absolute w-20 h-20 rounded-full border-2 cursor-pointer flex items-center justify-center transition bg-[#23343b] border-green-200`}
               style={{
                 left: `calc(50% + ${pos.x}px - 2.5rem)`,
@@ -100,32 +102,12 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
         })}
       </div>
 
-      <div className="flex justify-between p-4 w-100">
-        <button
-          onClick={resetAssignments}
-          className="px-4 py-2 bg-[#23343b] text-white rounded-lg border-2 border-red-200"
-        >
-          cбросить роли
-        </button>
-        <button
-          disabled={availableRoles.length !== 0}
-          onClick={() => navigate("/table")}
-          className={`px-4 py-2 bg-[#23343b] text-white rounded-lg border-2 border-green-200     ${
-            availableRoles.length !== 0
-              ? "bg-gray-500 cursor-not-allowed opacity-60"
-              : "bg-blue-600 hover:bg-blue-700 active:scale-95"
-          }`}
-        >
-          роли выбраны
-        </button>
-      </div>
-
       {/* Модалка выбора роли */}
-      {showRolePicker && (
+      {showStatusPicker && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
           <div className="bg-gray-900 p-4 rounded-xl max-w-sm w-full text-center relative">
             <div className="text-lg font-semibold text-white mb-3 relative">
-              <span>Выберите статус игроку {selectedPlayer}</span>
+              <span>Добавить статус игроку {selectedPlayer}</span>
             </div>
 
             {/* {availableRoles.length === 0 ? (
@@ -151,7 +133,7 @@ export default function Table({ playerCount, playersRoles, setPlayersRoles }) {
             )} */}
 
             <button
-              onClick={() => setShowRolePicker(false)}
+              onClick={() => setShowStatusPicker(false)}
               className="px-4 py-2 bg-red-700 text-white rounded-lg absolute top-0 right-0"
             >
               X
